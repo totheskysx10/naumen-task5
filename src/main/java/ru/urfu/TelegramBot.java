@@ -17,12 +17,21 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private final MessageService messageService;
 
+    /**
+     * Конструктор TelegramBot
+      * @param telegramBotName имя бота
+     * @param token токен бота
+     * @param messageService сервис создания сообщений
+     */
     public TelegramBot(String telegramBotName, String token, MessageService messageService) {
         super(token);
         this.telegramBotName = telegramBotName;
         this.messageService = messageService;
     }
 
+    /**
+     * Запускает бота Telegram
+     */
     public void start() {
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
@@ -33,6 +42,11 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
     }
 
+    /**
+     * Обрабатывает полученное сообщение, отправляет в чат ответ
+     * формата "Ваше сообщение: 'сообщение'"
+     * @param update полученное обновление
+     */
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {

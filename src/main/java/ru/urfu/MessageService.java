@@ -12,6 +12,6 @@ public class MessageService {
      * @param messageFromUser сообщение пользователя
      */
     public String createMessage(String messageFromUser) {
-        return "Ваше сообщение: " + messageFromUser;
+        return String.format("Ваше сообщение: %s", messageFromUser);
     }
 }

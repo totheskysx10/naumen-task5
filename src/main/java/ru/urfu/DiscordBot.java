@@ -17,12 +17,22 @@ public class DiscordBot {
     private GatewayDiscordClient client;
     private final MessageService messageService;
 
+
+    /**
+     * Конструктор DiscordBot
+     * @param token токен бота
+     * @param messageService сервис создания сообщений
+     */
     public DiscordBot(String token, MessageService messageService) {
         this.token = token;
         this.messageService = messageService;
     }
 
 
+    /**
+     * Запускает бота Discord, обрабатывает полученное сообщение, отправляет в чат ответ
+     * формата "Ваше сообщение: 'сообщение'"
+     */
     public void start() {
         client = DiscordClient.create(token).login().block();
         if (client == null) {
