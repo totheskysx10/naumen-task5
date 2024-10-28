@@ -15,6 +15,10 @@
 
         <telegrambots.version>6.9.7.1</telegrambots.version>
         <discord4j.version>3.2.6</discord4j.version>
+        <junit.version>5.11.3</junit.version>
+        <io.projectreactor.netty.version>1.1.23</io.projectreactor.netty.version>
+        <commons-codec.version>1.15</commons-codec.version>
+        <logback.version>1.4.14</logback.version>
     </properties>
 
     <dependencies>
@@ -29,6 +33,17 @@
             <groupId>com.discord4j</groupId>
             <artifactId>discord4j-core</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+
+        <!-- Добавил, так как приложение не стартовало без логгера -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -38,14 +53,36 @@
                 <artifactId>telegrambots</artifactId>
                 <version>${telegrambots.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.discord4j</groupId>
                 <artifactId>discord4j-core</artifactId>
                 <version>${discord4j.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
 
+            <!-- Ниже идут обновления для транзитивных библиотек, которые исправляют уязвимости.
+             Помню про возможное отсутствие обратной совместимости, но если их все закинуть в exclude,
+             не гарантируется корректная функциональность без них-->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.projectreactor.netty</groupId>
+                <artifactId>reactor-netty-http</artifactId>
+                <version>${io.projectreactor.netty.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
 </project>
